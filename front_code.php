@@ -1,6 +1,6 @@
 <?php include('admin/security.php');
 
-//ADD updates
+//ADD updates 
 if(isset($_POST['updates_save'])){
     $group_id = $_SESSION['group'];
     $title = $_POST['updates_title'];
@@ -16,40 +16,41 @@ if(isset($_POST['updates_save'])){
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
     $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
-
-    if($validate_file_extension){
-
-        if(file_exists("admin/upload/".$_FILES["updates_file"]["name"])){
-            $store = $_FILES["updates_file"]["name"];
-            $_SESSION['status']="File already exists. '$store'";
-            $_SESSION['status_code'] = "error";
-            header('location: updates.php');
     
-        }else{
-            $query = "INSERT INTO updates (title, description, file, group_id, visible, update_date, due_date, priority, prioritization) VALUES ('$title', '$description','$file','$group_id', '$visiablity',CURRENT_DATE(), '$due_date','$priority','$prioritization')";
-            $query_run = mysqli_query($connection,$query);
-    
-            if($query_run){
-                move_uploaded_file($_FILES["updates_file"]["tmp_name"], "admin/upload/".$_FILES["updates_file"]["name"]);
-                $_SESSION['status']= "Update was added.";
-                $_SESSION['status_code'] = "success";
-                header('location: updates.php');
-            }else{
-                $_SESSION['status']= "Update was not added.";
+    if($file!=NULL){ //modified
+        if($validate_file_extension){
+            if(file_exists("admin/upload/".$_FILES["updates_file"]["name"])){
+                $store = $_FILES["updates_file"]["name"];
+                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; //modified
                 $_SESSION['status_code'] = "error";
                 header('location: updates.php');
             }
+        }else{
+             $_SESSION['status']= "ファイル拡張子は正しくありません。";
+             $_SESSION['status_code'] = "error";
+             header('location: updates.php');
+    }
     
-        }
-
+    $query = "INSERT INTO updates (title, description, file, group_id, visible, update_date, due_date, priority, prioritization) VALUES ('$title', '$description','$file','$group_id', '$visiablity',CURRENT_DATE(), '$due_date','$priority','$prioritization')";
+    $query_run = mysqli_query($connection,$query);
+     
+    if($query_run){ 
+        move_uploaded_file($_FILES["updates_file"]["tmp_name"], "admin/upload/".$_FILES["updates_file"]["name"]);
+        $_SESSION['status']= "伝達事項を作成しました。";
+        $_SESSION['status_code'] = "success";
+        header('location: updates.php');
+    }else if($query_run){ 
+        $_SESSION['status']= "Update was added without file.";
+        $_SESSION['status_code'] = "success";
+        header('location: updates.php');
     }else{
-        $_SESSION['status']= "This type of file is not allowed.";
+        $_SESSION['status']= "伝達事項を作成できません。";
         $_SESSION['status_code'] = "error";
         header('location: updates.php');
     }
-
     
-}
+    
+   
 
 //Edit updates
 if(isset($_POST['updates_update'])){
@@ -96,12 +97,12 @@ if(isset($_POST['updates_update'])){
         if($query_run){
 
             if($file == NULL){
-                $_SESSION['status']="Updatesを更新しました。";
+                $_SESSION['status']="伝達事項を編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:updates.php');
             }else{
                 move_uploaded_file($_FILES["update_file"]["tmp_name"], "admin/upload/".$_FILES["update_file"]["name"]);
-                $_SESSION['status']="Updatesを更新しました。";
+                $_SESSION['status']="伝達事項を更新しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:updates.php');
             }
