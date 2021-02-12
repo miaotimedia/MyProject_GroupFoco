@@ -34,15 +34,17 @@ if(isset($_POST['updates_save'])){
     $query = "INSERT INTO updates (title, description, file, group_id, visible, update_date, due_date, priority, prioritization) VALUES ('$title', '$description','$file','$group_id', '$visiablity',CURRENT_DATE(), '$due_date','$priority','$prioritization')";
     $query_run = mysqli_query($connection,$query);
      
-    if($query_run){ 
-        move_uploaded_file($_FILES["updates_file"]["tmp_name"], "admin/upload/".$_FILES["updates_file"]["name"]);
-        $_SESSION['status']= "伝達事項を作成しました。";
-        $_SESSION['status_code'] = "success";
-        header('location: updates.php');
-    }else if($query_run){ 
-        $_SESSION['status']= "Update was added without file.";
-        $_SESSION['status_code'] = "success";
-        header('location: updates.php');
+    if($query_run){ //modified
+         if($file == NULL){
+                $_SESSION['status']= "伝達事項を作成しました。";
+                $_SESSION['status_code'] = "success";
+                header('location: updates.php');
+         }else{
+              move_uploaded_file($_FILES["updates_file"]["tmp_name"], "admin/upload/".$_FILES["updates_file"]["name"]);
+              $_SESSION['status']= "伝達事項を作成しました。";
+              $_SESSION['status_code'] = "success";
+              header('location: updates.php');
+         }
     }else{
         $_SESSION['status']= "伝達事項を作成できません。";
         $_SESSION['status_code'] = "error";
@@ -81,7 +83,7 @@ if(isset($_POST['updates_update'])){
             }else if($file_path="admin/upload/".$up_row['file']){
                 if(file_exists("admin/upload/".$_FILES["update_file"]["name"])){
                     $store = $_FILES["update_file"]["name"];
-                    $_SESSION['status']="File already exists. '$store'";
+                    $_SESSION['status']="ファイル. '$store'.は既に存在しています。";
                     $_SESSION['status_code'] = "error";
                     header('location: updates.php');
                     exit;
@@ -95,27 +97,26 @@ if(isset($_POST['updates_update'])){
         $query_run = mysqli_query($connection, $query);
     
         if($query_run){
-
             if($file == NULL){
                 $_SESSION['status']="伝達事項を編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:updates.php');
             }else{
                 move_uploaded_file($_FILES["update_file"]["tmp_name"], "admin/upload/".$_FILES["update_file"]["name"]);
-                $_SESSION['status']="伝達事項を更新しました。";
+                $_SESSION['status']="伝達事項を編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:updates.php');
             }
             
         }else{
-            $_SESSION['status']="Updatesの更新を失敗しました。";
+            $_SESSION['status']="伝達事項の編集を失敗しました。";
             $_SESSION['status_code'] = "error";
             header('location:updates.php');
         }
         
     
     }else{
-        $_SESSION['status']= "This type of file is not allowed.";
+        $_SESSION['status']= "ファイル拡張子は正しくありません。";
         $_SESSION['status_code'] = "error";
         header('location: updates.php');
     }   
@@ -138,38 +139,42 @@ if(isset($_POST['q&a_save'])){
     $ext=strtolower($extension);
     $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
 
-    if($validate_file_extension){
-        if(file_exists("admin/upload/".$_FILES["q&a_file"]["name"])){
-            $store = $_FILES["q&a_file"]["name"];
-            $_SESSION['status']="File already exists. '$store'";
-            $_SESSION['status_code'] = "error";
-            header('location: q_and_a.php');
     
-        }else{
-            $query = "INSERT INTO q_and_a (title, description, file, poster_id, post_date,group_id) VALUES ('$title', '$description','$file','$poster_id',NOW(),'$group_id')";
-            $query_run = mysqli_query($connection,$query);
-    
-            if($query_run){
-                move_uploaded_file($_FILES["q&a_file"]["tmp_name"], "admin/upload/".$_FILES["q&a_file"]["name"]);
-                $_SESSION['status']= "Update was added.";
-                $_SESSION['status_code'] = "success";
-                header('location: q_and_a.php');
-            }else{
-                $_SESSION['status']= "Update was not added.";
+    if($file!=NULL){ //modified
+        if($validate_file_extension){
+            if(file_exists("admin/upload/".$_FILES["updates_file"]["name"])){
+                $store = $_FILES["updates_file"]["name"];
+                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; //modified
                 $_SESSION['status_code'] = "error";
                 header('location: q_and_a.php');
             }
+        }else{
+             $_SESSION['status']= "ファイル拡張子は正しくありません。";
+             $_SESSION['status_code'] = "error";
+             header('location: q_and_a.php');
+    }
     
-        }
 
+    $query = "INSERT INTO q_and_a (title, description, file, poster_id, post_date,group_id) VALUES ('$title', '$description','$file','$poster_id',NOW(),'$group_id')";
+    $query_run = mysqli_query($connection,$query);
+
+    if($query_run){
+        if($file == NULL){
+            $_SESSION['status']= "質問を作成しました。";
+            $_SESSION['status_code'] = "error";
+            header('location: q_and_a.php');
+        }else{
+            move_uploaded_file($_FILES["q&a_file"]["tmp_name"], "admin/upload/".$_FILES["q&a_file"]["name"]);
+            $_SESSION['status']= "質問を作成しました。";
+            $_SESSION['status_code'] = "success";
+            header('location: q_and_a.php');
+        }
     }else{
-        $_SESSION['status']= "This type of file is not allowed.";
+        $_SESSION['status']="質問の作成を失敗しました。";
         $_SESSION['status_code'] = "error";
-        header('location: q_and_a.php');
+        header('location:q_and_a.php');
     }
 
-    
-}
 
 //Edit Q&A
 if(isset($_POST['q_and_a_update'])){
@@ -194,7 +199,7 @@ if(isset($_POST['q_and_a_update'])){
             }else if($file_path="admin/upload/".$up_row['file']){
                 if(file_exists("admin/upload/".$_FILES["update_file"]["name"])){
                     $store = $_FILES["update_file"]["name"];
-                    $_SESSION['status']="File already exists. '$store'";
+                    $_SESSION['status']="ファイル. '$store'.は既に存在しています。";
                     $_SESSION['status_code'] = "error";
                     header('location: q_and_a.php');
                     exit;
@@ -210,25 +215,25 @@ if(isset($_POST['q_and_a_update'])){
         if($query_run){
 
             if($file == NULL){
-                $_SESSION['status']="Q&Aを更新しました。";
+                $_SESSION['status']="質問を編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:q_and_a.php');
             }else{
                 move_uploaded_file($_FILES["update_file"]["tmp_name"], "admin/upload/".$_FILES["update_file"]["name"]);
-                $_SESSION['status']="Q&Aを更新しました。";
+                $_SESSION['status']="質問を編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:q_and_a.php');
             }
             
         }else{
-            $_SESSION['status']="Q&Aの更新を失敗しました。";
+            $_SESSION['status']="質問の編集を失敗しました。";
             $_SESSION['status_code'] = "error";
             header('location:q_and_a.php');
         }
         
     
     }else{
-        $_SESSION['status']= "This type of file is not allowed.";
+        $_SESSION['status']= "ファイル拡張子は正しくありません。";
         $_SESSION['status_code'] = "error";
         header('location: q_and_a.php');
     }   
@@ -258,7 +263,7 @@ if(isset($_POST['edit_userinfo'])){
             }else if($file_path="admin/upload/".$get_row['user_icon']){
                 if(file_exists("admin/upload/".$_FILES["user_icon"]["name"])){ //if file is uploaded but file name already exists
                     $store = $_FILES["user_icon"]["name"];
-                    $_SESSION['status']="File already exists. '$store'";
+                    $_SESSION['status']="ファイル. '$store'.は既に存在しています。";
                     $_SESSION['status_code'] = "error";
                     header('location: user_info.php');
                     exit;
