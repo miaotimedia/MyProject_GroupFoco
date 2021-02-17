@@ -1,6 +1,6 @@
 <?php include('admin/security.php');
 
-//ADD updates 
+//ADD updates
 if(isset($_POST['updates_save'])){
     $group_id = $_SESSION['group'];
     $title = $_POST['updates_title'];
@@ -16,12 +16,12 @@ if(isset($_POST['updates_save'])){
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
     $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
-    
-    if($file!=NULL){ //modified
+
+    if($file!=NULL){ 
         if($validate_file_extension){
             if(file_exists("admin/upload/".$_FILES["updates_file"]["name"])){
                 $store = $_FILES["updates_file"]["name"];
-                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; //modified
+                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; 
                 $_SESSION['status_code'] = "error";
                 header('location: updates.php');
             }
@@ -29,6 +29,7 @@ if(isset($_POST['updates_save'])){
              $_SESSION['status']= "ファイル拡張子は正しくありません。";
              $_SESSION['status_code'] = "error";
              header('location: updates.php');
+        }
     }
     
     $query = "INSERT INTO updates (title, description, file, group_id, visible, update_date, due_date, priority, prioritization) VALUES ('$title', '$description','$file','$group_id', '$visiablity',CURRENT_DATE(), '$due_date','$priority','$prioritization')";
@@ -50,9 +51,9 @@ if(isset($_POST['updates_save'])){
         $_SESSION['status_code'] = "error";
         header('location: updates.php');
     }
+
     
-    
-   
+}
 
 //Edit updates
 if(isset($_POST['updates_update'])){
@@ -119,7 +120,7 @@ if(isset($_POST['updates_update'])){
         $_SESSION['status']= "ファイル拡張子は正しくありません。";
         $_SESSION['status_code'] = "error";
         header('location: updates.php');
-    }   
+    }     
 
 }
 
@@ -139,12 +140,11 @@ if(isset($_POST['q&a_save'])){
     $ext=strtolower($extension);
     $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
 
-    
-    if($file!=NULL){ //modified
+    if($file!=NULL){ 
         if($validate_file_extension){
             if(file_exists("admin/upload/".$_FILES["updates_file"]["name"])){
                 $store = $_FILES["updates_file"]["name"];
-                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; //modified
+                $_SESSION['status']="ファイル. '$store'.は既に存在しています。"; 
                 $_SESSION['status_code'] = "error";
                 header('location: q_and_a.php');
             }
@@ -152,6 +152,7 @@ if(isset($_POST['q&a_save'])){
              $_SESSION['status']= "ファイル拡張子は正しくありません。";
              $_SESSION['status_code'] = "error";
              header('location: q_and_a.php');
+        }
     }
     
 
@@ -175,6 +176,8 @@ if(isset($_POST['q&a_save'])){
         header('location:q_and_a.php');
     }
 
+    
+}
 
 //Edit Q&A
 if(isset($_POST['q_and_a_update'])){
@@ -236,15 +239,15 @@ if(isset($_POST['q_and_a_update'])){
         $_SESSION['status']= "ファイル拡張子は正しくありません。";
         $_SESSION['status_code'] = "error";
         header('location: q_and_a.php');
-    }   
+    }  
 
 }
 
 //ユーザー情報変更
 if(isset($_POST['edit_userinfo'])){
     $user_id=$_POST['user_id'];
-    $username=$_POST['username'];//???
-    $email=$_POST['email'];//???
+    $username=$_POST['username'];
+    $email=$_POST['email'];
     $old_password=$_POST['old_password'];
     $new_password=$_POST['new_password'];
     $user_icon = $_FILES["user_icon"]['name'];
