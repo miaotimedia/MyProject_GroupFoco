@@ -107,11 +107,11 @@ if(isset($_POST['about_save'])){
     $query_run = mysqli_query($connection,$query);
 
     if($query_run){
-        $_SESSION['status']= "About was added.";
+        $_SESSION['status']= "伝達事項を追加しました。";
         $_SESSION['status_code'] = "success";
         header('location: about.php');
     }else{
-        $_SESSION['status']= "About was not added.";
+        $_SESSION['status']= "伝達事項の追加を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location: about.php');
     }
@@ -129,11 +129,11 @@ if(isset($_POST['about_update'])){
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
-        $_SESSION['status']="Aboutを更新しました。";
+        $_SESSION['status']="伝達事項を更新しました。";
         $_SESSION['status_code'] = "success";
         header('location:about.php');
     }else{
-        $_SESSION['status']="Aboutの更新を失敗しました。";
+        $_SESSION['status']="伝達事項の更新を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:about.php');
     }
@@ -146,11 +146,11 @@ if(isset($_POST['about_delete'])){
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
-        $_SESSION['status']="aboutを削除しました。";
+        $_SESSION['status']="伝達事項を削除しました。";
         $_SESSION['status_code'] = "success";
         header('location:about.php');
     }else{
-        $_SESSION['status']="aboutの削除を失敗しました。";
+        $_SESSION['status']="伝達事項の削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:about.php');
     }
@@ -176,11 +176,11 @@ if(isset($_POST['updates_delete'])){
 
     if($query_run){
         unlink($filepath);
-        $_SESSION['status']="Updatesを削除しました。";
+        $_SESSION['status']="タスクを削除しました。";
         $_SESSION['status_code'] = "success";
         header('location:updates.php');
     }else{
-        $_SESSION['status']="Updatesの削除を失敗しました。";
+        $_SESSION['status']="タスクの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:updates.php');
     }
@@ -210,11 +210,11 @@ if(isset($_POST['delete_multiple_data'])){
         foreach($filenames as $filename){
             unlink("upload/".$filename);
         }
-        $_SESSION["status"] = "Yout data is deleted.";
+        $_SESSION["status"] = "タスクを削除しました。";
         $_SESSION['status_code'] = "success";
         header("location: updates.php");
     }else{
-        $_SESSION["status"] = "Yout data is NOT deleted.";
+        $_SESSION["status"] = "タスクの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header("location: updates.php");
     }
@@ -238,11 +238,11 @@ if(isset($_POST['q&a_delete'])){
     if($query_run){
         unlink($filepath);
         $query_run = mysqli_query($connection, $delete_comments);
-        $_SESSION['status']="Updatesを削除しました。";
+        $_SESSION['status']="Q&Aを削除しました。";
         $_SESSION['status_code'] = "success";
         header('location:updates.php');
     }else{
-        $_SESSION['status']="Updatesの削除を失敗しました。";
+        $_SESSION['status']="Q&Aの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:updates.php');
     }
@@ -278,11 +278,11 @@ if(isset($_POST['delete_multiple_data_q&a'])){
             $delete_comments="DELETE FROM comments WHERE post_id='$comment_post_id'";
             $delete_comments_run = mysqli_query($connection, $delete_comments);
         }
-        $_SESSION["status"] = "Yout data is deleted.";
+        $_SESSION["status"] = "Q&Aを削除しました。";
         $_SESSION['status_code'] = "success";
         header("location: q_and_a.php");
     }else{
-        $_SESSION["status"] = "Yout data is NOT deleted.";
+        $_SESSION["status"] = "Q&Aの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header("location: q_and_a.php");
     }
@@ -300,11 +300,11 @@ if(isset($_POST['comments_delete'])){
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
-        $_SESSION['status']="Updatesを削除しました。";
+        $_SESSION['status']="コメントを削除しました。";
         $_SESSION['status_code'] = "success";
         header('location:updates.php');
     }else{
-        $_SESSION['status']="Updatesの削除を失敗しました。";
+        $_SESSION['status']="コメントの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:updates.php');
     }
@@ -327,11 +327,11 @@ if(isset($_POST['delete_multiple_data_comments'])){
     $query_run = mysqli_query($connection,$query);
 
     if($query_run){
-        $_SESSION["status"] = "Yout data is deleted.";
+        $_SESSION["status"] = "コメントを削除しました。";
         $_SESSION['status_code'] = "success";
         header("location: q_and_a.php");
     }else{
-        $_SESSION["status"] = "Yout data is NOT deleted.";
+        $_SESSION["status"] = "コメントの削除を失敗しました。";
         $_SESSION['status_code'] = "error";
         header("location: q_and_a.php");
     }
