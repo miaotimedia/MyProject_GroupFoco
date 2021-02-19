@@ -6,6 +6,11 @@ $db_username="root";
 $db_password="";
 $db_name="adminpanel";
 
+// $server_name="sql208.epizy.com";
+// $db_username="epiz_27851455";
+// $db_password="6RhrrpE3xMJ";
+// $db_name="epiz_27851455_groupfoco";
+
 $connection=mysqli_connect($server_name,$db_username,$db_password,$db_name);
 $dbconfig=mysqli_select_db($connection,$db_name);
 if($dbconfig){

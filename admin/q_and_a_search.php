@@ -5,6 +5,10 @@ include('security.php');?>
 if($_SESSION['usertype']!== "teacher"){
   header('location:../index.php');
 }
+
+if(isset($_POST['search_submit'])){
+  $username = $_POST['search'];
+}
 ?>
 
 <?php
@@ -14,10 +18,7 @@ include('includes/navbar.php');
 
 
 <div class="container-fluid">
-<form action="q_and_a_search.php" method="post" class="d-flex mb-3">
-  <input class="form-control" type="text" name="search" placeholder="名前で検索" style="width:200px;">
-  <button class="btn btn-primary ml-3" name="search_submit" type="submit">検索</button>
-</form>
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header">
@@ -33,7 +34,7 @@ include('includes/navbar.php');
 
             <div class="table-responsive">
             <?php
-            $query= "SELECT * FROM q_and_a JOIN register ON q_and_a.poster_id = register.id ORDER BY q_and_a.post_id DESC";
+            $query= "SELECT * FROM q_and_a JOIN register ON q_and_a.poster_id = register.id WHERE register.username LIKE '%$username%' ORDER BY q_and_a.post_id DESC";
             $query_run = mysqli_query($connection,$query);
             ?>
 
@@ -84,6 +85,7 @@ include('includes/navbar.php');
                     </tbody>
                 </table>
             </div>
+            <a href="q_and_a.php" class="btn btn-secondary mx-3 float-right">戻す</a>
         </div>
     </div>
 

@@ -161,17 +161,17 @@ if(isset($_POST['q&a_save'])){
 
     if($query_run){
         if($file == NULL){
-            $_SESSION['status']= "質問を作成しました。";
-            $_SESSION['status_code'] = "error";
+            $_SESSION['status']= "Q&Aを作成しました。";
+            $_SESSION['status_code'] = "success";
             header('location: q_and_a.php');
         }else{
             move_uploaded_file($_FILES["q&a_file"]["tmp_name"], "admin/upload/".$_FILES["q&a_file"]["name"]);
-            $_SESSION['status']= "質問を作成しました。";
+            $_SESSION['status']= "Q&Aを作成しました。";
             $_SESSION['status_code'] = "success";
             header('location: q_and_a.php');
         }
     }else{
-        $_SESSION['status']="質問の作成を失敗しました。";
+        $_SESSION['status']="Q&Aの作成を失敗しました。";
         $_SESSION['status_code'] = "error";
         header('location:q_and_a.php');
     }
@@ -218,18 +218,18 @@ if(isset($_POST['q_and_a_update'])){
         if($query_run){
 
             if($file == NULL){
-                $_SESSION['status']="質問を編集しました。";
+                $_SESSION['status']="Q&Aを編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:q_and_a.php');
             }else{
                 move_uploaded_file($_FILES["update_file"]["tmp_name"], "admin/upload/".$_FILES["update_file"]["name"]);
-                $_SESSION['status']="質問を編集しました。";
+                $_SESSION['status']="Q&Aを編集しました。";
                 $_SESSION['status_code'] = "success";
                 header('location:q_and_a.php');
             }
             
         }else{
-            $_SESSION['status']="質問の編集を失敗しました。";
+            $_SESSION['status']="Q&Aの編集を失敗しました。";
             $_SESSION['status_code'] = "error";
             header('location:q_and_a.php');
         }

@@ -14,7 +14,10 @@ include('includes/navbar.php');
 
 
 <div class="container-fluid">
-
+<form action="comments_search.php" method="post" class="d-flex mb-3">
+  <input class="form-control" type="text" name="search" placeholder="名前で検索" style="width:200px;">
+  <button class="btn btn-primary ml-3" name="search_submit" type="submit">検索</button>
+</form>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header p-3">

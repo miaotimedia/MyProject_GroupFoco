@@ -130,10 +130,10 @@
     ?>
 
 
-    
+<!--     
     <small class="d-block text-right mt-3">
       <a href="#">View All</a>
-    </small>
+    </small> -->
   </div>
 </main>
 

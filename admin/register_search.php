@@ -5,6 +5,10 @@ include('security.php');?>
 if($_SESSION['usertype']!== "teacher"){
   header('location:../index.php');
 }
+
+if(isset($_POST['search_submit'])){
+  $username = $_POST['search'];
+}
 ?>
 
 <?php
@@ -77,23 +81,13 @@ include('includes/navbar.php');
 
 
 <div class="container-fluid">
-<form action="register_search.php" method="post" class="d-flex mb-3">
-  <input class="form-control" type="text" name="search" placeholder="名前で検索" style="width:200px;">
-  <button class="btn btn-primary ml-3" name="search_submit" type="submit">検索</button>
-</form>
+
 <!-- DataTales Example -->
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h5 class="mt-2 font-weight-bold text-primary float-left">ユーザープロファイル </h5>
-    <button type="button" class="btn btn-link btn-outline-primary float-right" data-toggle="modal" data-target="#addadminprofile">
-      新規ユーザーを追加
-    </button>  
-  </div>
 
   <div class="card-body">
     <div class="table-responsive">
     <?php
-      $query="SELECT * FROM register";
+      $query="SELECT * FROM register WHERE username like '%$username%'";
       $query_run= mysqli_query($connection,$query);
     ?>
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -142,6 +136,7 @@ include('includes/navbar.php');
       </table>
 
     </div>
+    <a href="register.php" class="btn btn-secondary mx-3 float-right">戻す</a>
   </div>
 </div>
 

@@ -15,7 +15,7 @@ if(isset($_POST['register_save']))
     $email_query_run = mysqli_query($connection, $email_query);
     if(mysqli_num_rows($email_query_run) > 0)
     {
-        $_SESSION['status'] = "Email Already Taken. Please Try Another one.";
+        $_SESSION['status'] = "このメールアドレスは既に存在しています。";
         $_SESSION['status_code'] = "error";
         header('Location: register.php');  
     }

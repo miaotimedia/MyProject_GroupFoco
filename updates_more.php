@@ -25,14 +25,19 @@
                     <p class="blog-post-meta">提出日：<?php echo $row['due_date'];?> </p>
                     <p><?php echo $row['description'];?></p>
                     <div class="d-flex mb-4 align-items-start border-bottom">
-                      <strong class="mt-2">ファイル：</strong>
-                      <a href="download.php?id=<?php echo $row['id'];?>" class="btn btn-link ml-4">
-                        <?php echo $row['file'];?>
-                      </a>
+                    <?php
+                    if($row['file']!=NULL){
+                      echo"<strong class='mt-2'>ファイル：</strong>
+                      <a href='download.php?id=".$row['id']."' class='btn btn-link ml-4'>
+                        ".$row['file']."
+                      </a>";
+                    }
+                    
+                    ?>
                     </div>
                     <div class="row">
                       <div class="col-12 px-3">
-                        <a href="updates.php" class="btn btn-secondary mx-3 float-right">Back</a>
+                        <a href="updates.php" class="btn btn-secondary mx-3 float-right">戻す</a>
                         <form action="updates_edit.php" method="post">
                               <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                         <?php

@@ -9,7 +9,7 @@ if($dbconfig){
 }
 
 if(!$_SESSION['username']){
-    header('location:login.php');
+    header('location:admin/login.php');
 }
 
 if($_SESSION['group']){

@@ -79,7 +79,7 @@ if(mysqli_num_rows($query_run) > 0){
       <th scope="col">タイトル</th>
       <th scope="col">日時</th>
       <th scope="col">コメント数</th>
-      <th scope="col">URL</th>
+      <th scope="col">そのページへ</th>
     </tr>
   </thead>
   <tbody>
@@ -92,7 +92,15 @@ if(mysqli_num_rows($query_run) > 0){
     <tr>
       <td><?php echo $row['title'];?></td>
       <td><?php echo $row['post_date'];?></td>
-      <td></td>
+      <td><?php
+      $post_id=$row['post_id'];
+      $count_comments="SELECT * FROM comments WHERE post_id='$post_id'";
+      $count_comments_run=mysqli_query($connection,$count_comments);
+      if($count_comments_run){
+        $counts=mysqli_num_rows($count_comments_run);
+        echo $counts;
+      }
+      ?></td>
       <td><a href="q_and_a_more.php?post_id=<?php echo $row['post_id']; ?>">Go</a></td>
     </tr>
     <?php

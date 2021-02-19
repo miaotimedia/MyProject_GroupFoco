@@ -13,7 +13,10 @@ include('includes/navbar.php');
 ?>
 
 <div class="container-fluid">
-
+<form action="updates_search.php" method="post" class="d-flex mb-3">
+  <input class="form-control" type="text" name="search" placeholder="グループで検索" style="width:200px;">
+  <button class="btn btn-primary ml-3" name="search_submit" type="submit">検索</button>
+</form>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header">
@@ -59,7 +62,7 @@ include('includes/navbar.php');
                 <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['title']; ?></td>
                 <td> <?php echo $row['description']; ?></td>
-                <td> <?php echo '<img src="upload/'.$row['file'].'" width="100px;" height="100px;" alt="image">'?></td>
+                <td> <?php echo $row['file'];?></td>
                 <td> <?php echo $row['update_date']; ?></td>
                 <td> <?php echo $row['due_date']; ?></td>
                 <td>
