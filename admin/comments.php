@@ -56,7 +56,7 @@ include('includes/navbar.php');
                     <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['comment_id']; ?>" <?php echo $row['visible']==1 ? "checked" : ""?>>
                 </td>
                 <td> <?php echo $row['comment_sender_name']; ?></td>
-                <td> <?php echo $row['comment']; ?></td>
+                <td> <?php echo nl2br($row['comment']); ?></td>
                 <td> <?php echo $row['date_time']; ?></td>
                 <td>
                     <form action="code.php" method="post">

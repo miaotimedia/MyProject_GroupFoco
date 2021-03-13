@@ -43,8 +43,7 @@ include('includes/navbar.php');
                         <th>グループ</th>
                         <th>タイトル</th>
                         <th>内容</th>
-                        <th>ファイル</th>
-                        <th>アップデート</th>
+                        <th>日時</th>
                         <th>締め切り</th>
                         <th>削除</th>
                     </tr>
@@ -61,8 +60,7 @@ include('includes/navbar.php');
                 </td>
                 <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['title']; ?></td>
-                <td> <?php echo $row['description']; ?></td>
-                <td> <?php echo $row['file'];?></td>
+                <td> <?php echo nl2br($row['description']); ?></td>
                 <td> <?php echo $row['update_date']; ?></td>
                 <td> <?php echo $row['due_date']; ?></td>
                 <td>

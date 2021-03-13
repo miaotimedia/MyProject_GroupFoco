@@ -2,7 +2,6 @@
 <?php include('includes/header.php');?>
 <?php include('includes/navbar.php');?>
 
-<h1>Q&A</h1>
 
 <div class="modal fade" id="Updates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">

@@ -45,12 +45,6 @@ include('includes/navbar.php');
                     <label>Description</label>
                     <textarea class="form-control" name="edit_description" rows="3"><?php echo $row['description'];?></textarea> 
                 </div>
-                <div class="form-group">
-                    <label>Links</label>
-                    <input type="text" name="edit_links" value="<?php echo $row['links'];?> " class="form-control">
-                </div>
-
-                
 
                 <a href="about.php" class="btn btn-danger">キャンセル</a>
                 <button type="submit" name="about_update" class="btn btn-primary">更新する</button>

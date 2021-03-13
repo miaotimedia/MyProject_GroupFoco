@@ -15,7 +15,7 @@ if(isset($_POST['updates_save'])){
    
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
-    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
+    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','php','html','css','js']);
 
     if($file!=NULL){ 
         if($validate_file_extension){
@@ -70,7 +70,7 @@ if(isset($_POST['updates_update'])){
 
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
-    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','']);
+    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','php','html','css','js','']);
 
 
     if($validate_file_extension){
@@ -138,7 +138,7 @@ if(isset($_POST['q&a_save'])){
    
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
-    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif']);
+    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','php','html','css','js']);
 
     if($file!=NULL){ 
         if($validate_file_extension){
@@ -189,7 +189,7 @@ if(isset($_POST['q_and_a_update'])){
 
     $extension = pathinfo($file, PATHINFO_EXTENSION);
     $ext=strtolower($extension);
-    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','']);
+    $validate_file_extension= in_array($ext, ['zip', 'pdf', 'docx','doc','txt','xlsx','jpg','jpeg','png','gif','php','html','css','js','']);
 
 
     if($validate_file_extension){
@@ -199,20 +199,20 @@ if(isset($_POST['q_and_a_update'])){
         foreach($updates_query_run as $up_row){
             if($file == NULL){
                 $file_data=$up_row['file'];
-            }else if($file_path="admin/upload/".$up_row['file']){
-                if(file_exists("admin/upload/".$_FILES["update_file"]["name"])){
+            }else if(file_exists("admin/upload/".$_FILES["update_file"]["name"])){
                     $store = $_FILES["update_file"]["name"];
                     $_SESSION['status']="ファイル. '$store'.は既に存在しています。";
                     $_SESSION['status_code'] = "error";
                     header('location: q_and_a.php');
                     exit;
-                }else{
-                    unlink($file_path);
-                    $file_data=$file;
-                }
+            }else{
+                $file_path="admin/upload/".$up_row['file'];
+                unlink($file_path);
+                $file_data=$file;
             }
         }
-        $query="UPDATE q_and_a SET title='$title',description='$description',file='$file_data' WHERE poster_id='$id'";
+        
+        $query="UPDATE q_and_a SET title='$title',description='$description',file='$file_data' WHERE post_id='$id'";
         $query_run = mysqli_query($connection, $query);
     
         if($query_run){
@@ -309,6 +309,37 @@ if(isset($_POST['edit_userinfo'])){
         header('location: user_info.php');
     }
 }
-  
 
+// ADD attendance
+if(isset($_POST['attendance'])){
+    if($_POST['class']!=""){
+        $class=$_POST['class'];
+        $day=$_POST['day'];
+        $time_range=$_POST['time_range'];
+        $group_id=$_POST['group_id'];
+
+        if($_POST['att_check']!=""){
+            $att_check = implode("、", $_POST['att_check']);
+        }else{
+            $att_check="全員出席";
+        }
+
+        $query="INSERT INTO attendance (class, class_day, time_range, student_attend, group_id, date_time) VALUES ('$class','$day','$time_range','$att_check','$group_id',NOW())" ;
+        $query_run = mysqli_query($connection,$query);
+        if($query_run){
+            $_SESSION['status']= "出席情報を送信しました！";
+            $_SESSION['status_code'] = "success";
+            header('location: index.php');
+        }else{
+            $_SESSION['status']= "送信失敗しました！";
+            $_SESSION['status_code'] = "error";
+            header('location: index.php');
+        }
+
+    }else{
+        $_SESSION['status']= "科目記号を入力してください！";
+        $_SESSION['status_code'] = "error";
+        header('location: index.php');
+    } 
+}
 ?>

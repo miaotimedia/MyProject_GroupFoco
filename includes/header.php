@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">   
+    <meta charset="utf-8"> 
+    <link rel="shortcut icon" type="image/jpg" href="../admin/images/icon.png"/>
+
+    <title>Group Foco 学生システム</title>
+  
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/offcanvas/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

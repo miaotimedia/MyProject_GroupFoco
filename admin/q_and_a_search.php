@@ -63,7 +63,7 @@ include('includes/navbar.php');
                 <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['username']; ?></td>
                 <td> <?php echo $row['title']; ?></td>
-                <td> <?php echo $row['description']; ?></td>
+                <td> <?php echo nl2br($row['description']); ?></td>
                 <td> <?php echo '<img src="upload/'.$row['file'].'" width="100px;" height="100px;" alt="image">'?></td>
                 <td>
                     <form action="code.php" method="post">

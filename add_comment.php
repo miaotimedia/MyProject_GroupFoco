@@ -1,6 +1,5 @@
 
 <?php
-//delete this?
 $connect= new PDO('mysql:host=localhost;dbname=adminpanel','root','');
 $error='';
 $comment_content='';
@@ -28,7 +27,7 @@ if($error==''){
             ':post_id'=> $post_id 
         )
     );
-    $error = '<label class="text-success">Comment Added</label>';
+    $error = '<label class="text-success">投稿にコメントをしました！</label>';
 }
 
 

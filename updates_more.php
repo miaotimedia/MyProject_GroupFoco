@@ -23,7 +23,7 @@
                     <small><?php echo $row['update_date'];?></small>
                     <hr>
                     <p class="blog-post-meta">提出日：<?php echo $row['due_date'];?> </p>
-                    <p><?php echo $row['description'];?></p>
+                    <p><?php echo nl2br($row['description']);?></p>
                     <div class="d-flex mb-4 align-items-start border-bottom">
                     <?php
                     if($row['file']!=NULL){
@@ -37,7 +37,7 @@
                     </div>
                     <div class="row">
                       <div class="col-12 px-3">
-                        <a href="updates.php" class="btn btn-secondary mx-3 float-right">戻す</a>
+                        <a href="updates.php" class="btn btn-secondary mx-3 float-right">戻る</a>
                         <form action="updates_edit.php" method="post">
                               <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                         <?php

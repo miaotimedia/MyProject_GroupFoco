@@ -5,10 +5,6 @@ include('security.php');?>
 if($_SESSION['usertype']!== "teacher"){
   header('location:../index.php');
 }
-
-if(isset($_POST['search_submit'])){
-  $username = $_POST['search'];
-}
 ?>
 
 <?php
@@ -16,22 +12,23 @@ include('includes/header.php');
 include('includes/navbar.php'); 
 ?>
 
-
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header p-3">
-            <h5 class="m-0 font-weight-bold text-primary">コメント一覧</h5>
-                <form action="code.php" method="post" style="margin-top: -25px;">
-                    <button type="submit" name="delete_multiple_data_q&a" class="float-right btn btn-danger delete_multi_btn_ajax">選択された内容を削除する</button>
-                </form>
+        <div class="card-header">
+            <h5 class="m-0 font-weight-bold text-primary">出席情報一覧</h6>
+            <form action="code.php" method="post">
+                <button type="submit" name="delete_multiple_data" class="float-right btn btn-danger delete_multi_btn_ajax" style="margin-top: -25px;">
+                  選択された内容を削除する
+                </button>
+            </form>
         </div>
 
         <div class="card-body">
 
             <div class="table-responsive">
             <?php
-            $query= "SELECT * FROM comments WHERE comment_sender_name LIKE '%$username%'";
+            $query= "SELECT * FROM attendance ORDER BY id DESC";
             $query_run = mysqli_query($connection,$query);
             ?>
 
@@ -39,8 +36,11 @@ include('includes/navbar.php');
                 <thead>
                     <tr>
                         <th></th>
-                        <th>ユーザー名</th>
-                        <th>内容</th>
+                        <th>科目記号</th>
+                        <th>曜日</th>
+                        <th>時間帯</th>
+                        <th>欠席状況</th>
+                        <th>グループ</th>
                         <th>日時</th>
                         <th>削除</th>
                     </tr>
@@ -53,14 +53,17 @@ include('includes/navbar.php');
             ?>
              <tr>
                 <td>
-                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['comment_id']; ?>" <?php echo $row['visible']==1 ? "checked" : ""?>>
+                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id']; ?>" <?php echo $row['visible']==1 ? "checked" : ""?>>
                 </td>
-                <td> <?php echo $row['comment_sender_name']; ?></td>
-                <td> <?php echo nl2br($row['comment']); ?></td>
+                <td> <?php echo $row['class']; ?></td>
+                <td> <?php echo $row['class_day']; ?></td>
+                <td> <?php echo $row['time_range']; ?></td>
+                <td> <?php echo nl2br($row['student_attend']); ?></td>
+                <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['date_time']; ?></td>
                 <td>
                     <form action="code.php" method="post">
-                    <input type="hidden" class="delete_id_value" name="delete_id" value="<?php echo $row['comment_id']; ?>">
+                    <input type="hidden" class="delete_id_value" name="delete_id" value="<?php echo $row['id']; ?>">
                     <a href="javascript:void(0)" class="btn btn-danger delete_btn_ajax">削除</a>
                     </form>
                 </td>
@@ -78,7 +81,6 @@ include('includes/navbar.php');
                     </tbody>
                 </table>
             </div>
-            <a href="comments.php" class="btn btn-secondary mx-3 float-right">戻る</a>
         </div>
     </div>
 
@@ -98,7 +100,7 @@ function toggleCheckbox(box){
     }
 
     var data = {
-        "search_data":1,
+        "search_attend":1,
         "id": id,
         "visible": visible
     };
@@ -134,7 +136,7 @@ $(document).ready(function(){
             type:"POST",
             url:"code.php",
             data:{
-              "comments_delete":1,
+              "attend_delete":1,
               "delete_id":delete_id,
             },
             success:function(response){  }
@@ -173,7 +175,7 @@ $(document).ready(function(){
             type:"POST",
             url:"code.php",
             data:{
-              "delete_multiple_data_comments":1,
+              "delete_multiple_attend":1,
             },
             success:function(response){  }
           });

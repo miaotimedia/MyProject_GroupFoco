@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<main role="main" class="container py-5">
+<main role="main" class="container py-0">
   <div class="d-flex align-items-center p-3 my-3 text-black-50 bg-purple rounded shadow-sm">
     <i class="fa fa-info-circle fa-5x mr-3 " aria-hidden="true"></i>
     <div class="lh-100">

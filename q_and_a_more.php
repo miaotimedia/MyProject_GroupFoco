@@ -22,7 +22,7 @@
                             <p>by <?php echo $row['username'];?>   <?php echo $row['post_date'];?></p>
 
                             <hr>
-                            <p><?php echo $row['description'];?> </p>
+                            <p><?php echo nl2br($row['description']); ?> </p>
                             <div class="d-flex mb-4 align-items-start border-bottom">
                                 <strong class="mt-2">ファイル：</strong>
                                 <a href="download.php?id=<?php echo $row['post_id'];?>" class="btn btn-link ml-4">

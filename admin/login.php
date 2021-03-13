@@ -8,14 +8,21 @@ include('includes/header.php');
 
 <div class="container">
 
-<!-- Outer Row -->
 <div class="row justify-content-center">
 
   <div class="col-xl-6 col-lg-6 col-md-6">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="mt-3 img-fluid text-center">
+        <img src="./images/icon.png" alt="icon">
+    </div>
+    <div class="text-center">
+        <h1 class="text-dark">Group Foco</h1>
+        <h5 class="text-dark">学生プロジェクト管理システム</h5>
+        <small class="text-dark">Student Project Management System</small>
+    </div>
+
+    <div class="card o-hidden border-0 shadow-lg my-4">
       <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
         <div class="row">
           <div class="col-lg-12">
             <div class="p-5">

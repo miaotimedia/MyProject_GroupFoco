@@ -30,7 +30,7 @@
                     <textarea class="form-control" name="edit_description" rows="8"><?php echo $row['description'];?></textarea> 
                 </div>
                 <div class="form-group">
-                    <label>ファイル</label>
+                    <label>ファイル</label><br>
                     <input type="file" name="update_file" id="update_file" >
                 </div> 
                

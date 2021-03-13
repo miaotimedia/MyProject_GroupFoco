@@ -53,7 +53,7 @@ include('includes/navbar.php');
                     <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['notification_id']; ?>" <?php echo $row['visible']==1 ? "checked" : ""?>>
                 </td>
                 <td> <?php echo $row['notification_subject']; ?></td>
-                <td> <?php echo $row['notification_text']; ?></td>
+                <td> <?php echo nl2br($row['notification_text']); ?></td>
                 <td> <?php echo $row['notification_datetime']; ?></td>
                 <td>
                     <form action="notification_code.php" method="post">

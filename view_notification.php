@@ -2,7 +2,7 @@
 <?php include('includes/header.php');?>
 <?php include('includes/navbar.php');?>
 
-<main class="mt-5 pt-5">
+<main class="mt-3">
     <div class="container-fluid">
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -36,7 +36,7 @@
                 <tr>
                     <td> <?php echo $row['notification_subject']; ?></td>
                     <td> <?php echo $row['username']; ?></td>
-                    <td> <?php echo $row['notification_text']; ?></td>
+                    <td> <?php echo nl2br($row['notification_text']);?></td>
                     <td> <?php echo $row['notification_datetime']; ?></td>
                 </tr>
 

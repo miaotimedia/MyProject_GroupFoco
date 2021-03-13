@@ -61,7 +61,7 @@ include('includes/navbar.php');
                 </td>
                 <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['title']; ?></td>
-                <td> <?php echo $row['description']; ?></td>
+                <td> <?php echo nl2br($row['description']); ?></td>
                 <td> <?php echo $row['file'];?></td>
                 <td> <?php echo $row['update_date']; ?></td>
                 <td> <?php echo $row['due_date']; ?></td>
@@ -85,7 +85,7 @@ include('includes/navbar.php');
                     </tbody>
                 </table>
             </div>
-            <a href="updates.php" class="btn btn-secondary mx-3 float-right">戻す</a>
+            <a href="updates.php" class="btn btn-secondary mx-3 float-right">戻る</a>
         </div>
     </div>
 </div>

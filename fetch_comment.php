@@ -1,6 +1,5 @@
 <?php
 
-//delete this?
 $connect= new PDO('mysql:host=localhost;dbname=adminpanel','root','');
 
 $post_id=$_POST['post_id'];

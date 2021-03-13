@@ -136,7 +136,7 @@ include('includes/navbar.php');
       </table>
 
     </div>
-    <a href="register.php" class="btn btn-secondary mx-3 float-right">戻す</a>
+    <a href="register.php" class="btn btn-secondary mx-3 float-right">戻る</a>
   </div>
 </div>
 

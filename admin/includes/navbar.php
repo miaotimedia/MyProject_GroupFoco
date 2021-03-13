@@ -3,10 +3,13 @@
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-  <div class="sidebar-brand-icon">
-    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+  <div class="sidebar-brand-icon" style="margin-left: -30px;">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>  
   </div>
-  <div class="sidebar-brand-text mx-1">HEW <sub>管理システム</sub></div>
+  <div class="sidebar-brand-text ml-2">
+    <sub>Group Foco</sub><br>
+    <sub>管理システム</sub>
+  </div>
 </a>
 
 <!-- Divider -->
@@ -59,6 +62,12 @@
 <div class="sidebar-heading">
   ページ管理
 </div>
+
+<li class="nav-item">
+  <a class="nav-link" href="./attendance.php">
+    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+    <span>出席情報</span></a>
+</li>
 
 <li class="nav-item">
   <a class="nav-link" href="./about.php">
@@ -136,6 +145,10 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item border-bottom" href="../index.php">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  学生システムへ
+                </a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   ログアウト

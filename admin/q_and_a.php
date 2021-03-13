@@ -45,7 +45,6 @@ include('includes/navbar.php');
                         <th>ユーザー</th>
                         <th>タイトル</th>
                         <th>内容</th>
-                        <th>ファイル</th>
                         <th>削除</th>
                     </tr>
                 </thead>
@@ -62,8 +61,7 @@ include('includes/navbar.php');
                 <td> <?php echo $row['group_id']; ?></td>
                 <td> <?php echo $row['username']; ?></td>
                 <td> <?php echo $row['title']; ?></td>
-                <td> <?php echo $row['description']; ?></td>
-                <td> <?php echo '<img src="upload/'.$row['file'].'" width="100px;" height="100px;" alt="image">'?></td>
+                <td> <?php echo nl2br($row['description']); ?></td>
                 <td>
                     <form action="code.php" method="post">
                     <input type="hidden" class="delete_id_value" name="delete_id" value="<?php echo $row['post_id']; ?>">

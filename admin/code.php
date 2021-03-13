@@ -101,9 +101,8 @@ if(isset($_POST['about_save'])){
     $title = $_POST['title'];
     $subtitle = $_POST['subtitle'];
     $description = $_POST['description'];
-    $links = $_POST['links'];
 
-    $query = "INSERT INTO about (title, subtitle, description, links) VALUES ('$title', '$subtitle', '$description','$links')";
+    $query = "INSERT INTO about (title, subtitle, description, datetime) VALUES ('$title', '$subtitle', '$description', NOW())";
     $query_run = mysqli_query($connection,$query);
 
     if($query_run){
@@ -123,9 +122,8 @@ if(isset($_POST['about_update'])){
     $title=$_POST['edit_title'];
     $subtitle=$_POST['edit_subtitle'];
     $description=$_POST['edit_description'];
-    $links= $_POST['edit_links'];
 
-    $query="UPDATE about SET title='$title', subtitle='$subtitle',description='$description',links='$links' WHERE id='$id'";
+    $query="UPDATE about SET title='$title', subtitle='$subtitle',description='$description' WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
@@ -158,7 +156,7 @@ if(isset($_POST['about_delete'])){
 
 //About end
 
-//Add Updates
+
 
 
 //Delete Updates
@@ -321,7 +319,7 @@ if(isset($_POST['search_data'])){
 
 if(isset($_POST['delete_multiple_data_comments'])){
     $vid = "1";
-    $get_multi_filepath="SELECT * FROM comments WHERE visible = '$vid'";
+    // $get_multi_filepath="SELECT * FROM comments WHERE visible = '$vid'";
    
     $query = "DELETE FROM comments WHERE visible='$vid' ";
     $query_run = mysqli_query($connection,$query);
@@ -336,4 +334,53 @@ if(isset($_POST['delete_multiple_data_comments'])){
         header("location: q_and_a.php");
     }
 }
+
+
+
+//Delete Attendence
+
+if(isset($_POST['attend_delete'])){
+    $id=$_POST['delete_id'];
+
+    $query="DELETE FROM attendance WHERE id='$id'";
+    $query_run = mysqli_query($connection, $query);
+
+    if($query_run){
+        $_SESSION['status']="出席情報を削除しました。";
+        $_SESSION['status_code'] = "success";
+        header('location:attendance.php');
+    }else{
+        $_SESSION['status']="出席情報の削除を失敗しました。";
+        $_SESSION['status_code'] = "error";
+        header('location:attendance.php');
+    }
+}
+
+if(isset($_POST['search_attend'])){
+    $id = $_POST['id'];
+    $visible = $_POST['visible'];
+
+    $query = "UPDATE attendance SET visible = '$visible' WHERE id='$id' ";
+    $query_run = mysqli_query($connection,$query);
+}
+
+if(isset($_POST['delete_multiple_attend'])){
+    $vid = "1";
+    $query = "DELETE FROM attendance WHERE visible='$vid' ";
+    $query_run = mysqli_query($connection,$query);
+
+    if($query_run){
+        $_SESSION["status"] = "出席情報を削除しました。";
+        $_SESSION['status_code'] = "success";
+        header("location: attendance.php");
+    }else{
+        $_SESSION["status"] = "出席情報の削除を失敗しました。";
+        $_SESSION['status_code'] = "error";
+        header("location: attendance.php");
+    }
+}
+
 ?>
+
+
+

@@ -39,12 +39,7 @@ include('includes/navbar.php');
                         <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control" name="description" rows="3" palceholder="Enter Description"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Links</label>
-                            <input type="text" class="form-control" name="links" placeholder="Enter Links">   
-                        </div>       
+                        </div>    
             </div>
 
             <div class="modal-footer">
@@ -75,8 +70,7 @@ include('includes/navbar.php');
         <div class="card-body">
             <div class="table-responsive">
             <?php
-                $connection= mysqli_connect("localhost","root","","adminpanel");
-                $query="SELECT * FROM about";
+                $query="SELECT * FROM about ORDER BY id DESC";
                 $query_run= mysqli_query($connection,$query);
 
             ?>
@@ -87,7 +81,7 @@ include('includes/navbar.php');
                                 <th>タイトル</th>
                                 <th>サブタイトル</th>
                                 <th>内容</th>
-                                <th>URL</th>
+                                <th>日時</th>
                                 <th>編集</th>
                                 <th>削除</th>
                             </tr>
@@ -100,8 +94,8 @@ include('includes/navbar.php');
                             <tr>
                                 <td> <?php echo $row['title']; ?></td>
                                 <td> <?php echo $row['subtitle']; ?></td>
-                                <td> <?php echo $row['description']; ?></td>
-                                <td> <?php echo $row['links']; ?></td>
+                                <td> <?php echo nl2br($row['description']); ?></td>
+                                <td> <?php echo $row['datetime']; ?></td>
                                 <td>
                                     <form action="about_edit.php" method="post">
                                         <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
